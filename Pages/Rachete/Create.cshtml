@@ -1,0 +1,70 @@
+﻿@page
+@model Proiect_MDP_Web.Pages.Rachete.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Racheta</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Racheta.Denumire" class="control-label"></label>
+                <input asp-for="Racheta.Denumire" class="form-control" />
+                <span asp-validation-for="Racheta.Denumire" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Racheta.Material" class="control-label"></label>
+                <input asp-for="Racheta.Material" class="form-control" />
+                <span asp-validation-for="Racheta.Material" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Racheta.Tehnologie" class="control-label"></label>
+                <input asp-for="Racheta.Tehnologie" class="form-control" />
+                <span asp-validation-for="Racheta.Tehnologie" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Racheta.Greutate" class="control-label"></label>
+                <input asp-for="Racheta.Greutate" class="form-control" />
+                <span asp-validation-for="Racheta.Greutate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Racheta.DimensiuneCap" class="control-label"></label>
+                <input asp-for="Racheta.DimensiuneCap" class="form-control" />
+                <span asp-validation-for="Racheta.DimensiuneCap" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Racheta.Pret" class="control-label"></label>
+                <input asp-for="Racheta.Pret" class="form-control" />
+                <span asp-validation-for="Racheta.Pret" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Racheta.Editie" class="control-label"></label>
+                <input asp-for="Racheta.Editie" class="form-control" />
+                <span asp-validation-for="Racheta.Editie" class="textdanger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Racheta.MagazinID" class="control-label">Denumire Magazin</label>
+                <select asp-for="Racheta.MagazinID" class="form-control" asp-items="ViewBag.MagazinID">
+                </select>
+                <span asp-validation-for="Racheta.MagazinID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
