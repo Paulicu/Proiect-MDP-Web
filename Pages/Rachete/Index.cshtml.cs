@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -20,15 +21,31 @@ namespace Proiect_MDP_Web.Pages.Rachete
         }
 
         public IList<Racheta> Racheta { get;set; } = default!;
+        public IList<Firma> Firme { get; set; } = default!;
 
-        public async Task OnGetAsync()
+        public RachetaData RachetaD { get; set; }
+        public int RachetaID { get; set; }
+        public int CategorieID { get; set; }
+
+        public async Task OnGetAsync(int? id, int? categorieID)
         {
-            if (_context.Racheta != null)
-            {
-                Racheta = await _context.Racheta
+            RachetaD = new RachetaData();
+
+            RachetaD.Rachete = await _context.Racheta
                     .Include(b => b.Magazin)
-                    .Include(c => c.Firma)
+                    .Include(b => b.Firma)
+                    .Include(b => b.CategoriiRacheta)
+                    .ThenInclude(b => b.Categorie)
+                    .AsNoTracking()
+                    .OrderBy(b => b.Denumire)
                     .ToListAsync();
+
+            if (id != null)
+            {
+                RachetaID = id.Value;
+                Racheta racheta = RachetaD.Rachete
+                .Where(i => i.ID == id.Value).Single();
+                RachetaD.Categorii = racheta.CategoriiRacheta.Select(s => s.Categorie);
             }
         }
     }

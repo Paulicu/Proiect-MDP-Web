@@ -40,45 +40,64 @@
             <th>
                 @Html.DisplayNameFor(model => model.Racheta[0].Firma.DenumireFirma)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Racheta[0].CategoriiRacheta)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Racheta) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Denumire)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Material)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tehnologie)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Greutate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DimensiuneCap)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Pret)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Editie)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Magazin.DenumireMagazin)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Firma.DenumireFirma)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.RachetaD.Rachete)
+        {
+            string selectedRow = "";
+
+            if (item.ID == Model.RachetaID)
+            {
+                selectedRow = "table-success";
+            }
+
+            <tr class="@selectedRow">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Denumire)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Material)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tehnologie)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Greutate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DimensiuneCap)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pret)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Editie)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Magazin.DenumireMagazin)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Firma.DenumireFirma)
+                </td>
+                <td>
+                    @{
+                        foreach (var category in item.CategoriiRacheta)
+                        {
+                            @category.Categorie.ID @: @category.Categorie.DenumireCategorie <br />
+                        }
+                    }
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

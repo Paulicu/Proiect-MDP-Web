@@ -12,7 +12,7 @@ using Proiect_MDP_Web.Models;
 
 namespace Proiect_MDP_Web.Pages.Rachete
 {
-    public class EditModel : PageModel
+    public class EditModel : CategorieRachetaPageModel
     {
         private readonly Proiect_MDP_Web.Data.Proiect_MDP_WebContext _context;
 
@@ -31,12 +31,19 @@ namespace Proiect_MDP_Web.Pages.Rachete
                 return NotFound();
             }
 
-            var racheta =  await _context.Racheta.FirstOrDefaultAsync(m => m.ID == id);
-            if (racheta == null)
+            Racheta =  await _context.Racheta
+                .Include(b => b.Magazin)
+                .Include(b => b.Firma)
+                .Include(b => b.CategoriiRacheta).ThenInclude(b => b.Categorie)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.ID == id);
+
+            if (Racheta == null)
             {
                 return NotFound();
             }
-            Racheta = racheta;
+
+            PopulateAssignedCategoryData(_context, Racheta);
             ViewData["MagazinID"] = new SelectList(_context.Set<Magazin>(), "ID", "DenumireMagazin");
             ViewData["FirmaID"] = new SelectList(_context.Set<Firma>(), "ID", "DenumireFirma");
             return Page();
@@ -44,32 +51,39 @@ namespace Proiect_MDP_Web.Pages.Rachete
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int? id, string[] selectedCategories)
         {
-            if (!ModelState.IsValid)
+            if (id == null)
             {
-                return Page();
+                return NotFound();
             }
 
-            _context.Attach(Racheta).State = EntityState.Modified;
+            var rachetaDeUpdatat = await _context.Racheta
+            .Include(i => i.Magazin)
+            .Include(i => i.Firma)
+            .Include(i => i.CategoriiRacheta)
+            .ThenInclude(i => i.Categorie)
+            .FirstOrDefaultAsync(s => s.ID == id);
 
-            try
+            if (rachetaDeUpdatat == null)
             {
+                return NotFound();
+            }
+
+            if (await TryUpdateModelAsync<Racheta>(
+            rachetaDeUpdatat,
+            "Racheta",
+            i => i.Denumire, i => i.Firma, i => i.FirmaID,
+            i => i.Pret, i => i.Editie, i => i.MagazinID))
+            {
+                UpdateBookCategories(_context, selectedCategories, rachetaDeUpdatat);
                 await _context.SaveChangesAsync();
+                return RedirectToPage("./Index");
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!RachetaExists(Racheta.ID))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return RedirectToPage("./Index");
+       
+            UpdateBookCategories(_context, selectedCategories, rachetaDeUpdatat);
+            PopulateAssignedCategoryData(_context, rachetaDeUpdatat);
+            return Page();
         }
 
         private bool RachetaExists(int id)
