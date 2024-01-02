@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Proiect_MDP_Web.Data;
 using Proiect_MDP_Web.Models;
 
-namespace Proiect_MDP_Web.Pages.Rachete
+namespace Proiect_MDP_Web.Pages.Firme
 {
     public class IndexModel : PageModel
     {
@@ -19,16 +19,13 @@ namespace Proiect_MDP_Web.Pages.Rachete
             _context = context;
         }
 
-        public IList<Racheta> Racheta { get;set; } = default!;
+        public IList<Firma> Firma { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
-            if (_context.Racheta != null)
+            if (_context.Firma != null)
             {
-                Racheta = await _context.Racheta
-                    .Include(b => b.Magazin)
-                    .Include(c => c.Firma)
-                    .ToListAsync();
+                Firma = await _context.Firma.ToListAsync();
             }
         }
     }

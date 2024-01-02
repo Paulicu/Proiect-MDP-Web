@@ -28,6 +28,9 @@ namespace Proiect_MDP_Web.Models
         public int? MagazinID { get; set; }
         public Magazin? Magazin { get; set; } // navigation property
 
+        public int? FirmaID { get; set; }
+        public Firma? Firma { get; set; } // navigation property
+
 
     }
 }

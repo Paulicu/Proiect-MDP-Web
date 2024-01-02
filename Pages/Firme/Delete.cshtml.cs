@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Proiect_MDP_Web.Data;
 using Proiect_MDP_Web.Models;
 
-namespace Proiect_MDP_Web.Pages.Rachete
+namespace Proiect_MDP_Web.Pages.Firme
 {
     public class DeleteModel : PageModel
     {
@@ -20,43 +20,40 @@ namespace Proiect_MDP_Web.Pages.Rachete
         }
 
         [BindProperty]
-      public Racheta Racheta { get; set; } = default!;
+      public Firma Firma { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Racheta == null)
+            if (id == null || _context.Firma == null)
             {
                 return NotFound();
             }
 
-            var racheta = await _context.Racheta
-                .Include(b => b.Magazin)
-                .Include(c => c.Firma)
-                .FirstOrDefaultAsync(m => m.ID == id);
+            var firma = await _context.Firma.FirstOrDefaultAsync(m => m.ID == id);
 
-            if (racheta == null)
+            if (firma == null)
             {
                 return NotFound();
             }
             else 
             {
-                Racheta = racheta;
+                Firma = firma;
             }
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (id == null || _context.Racheta == null)
+            if (id == null || _context.Firma == null)
             {
                 return NotFound();
             }
-            var racheta = await _context.Racheta.FindAsync(id);
+            var firma = await _context.Firma.FindAsync(id);
 
-            if (racheta != null)
+            if (firma != null)
             {
-                Racheta = racheta;
-                _context.Racheta.Remove(Racheta);
+                Firma = firma;
+                _context.Firma.Remove(Firma);
                 await _context.SaveChangesAsync();
             }
 

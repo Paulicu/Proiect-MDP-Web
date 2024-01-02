@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Proiect_MDP_Web.Data;
 
@@ -11,9 +12,10 @@ using Proiect_MDP_Web.Data;
 namespace Proiect_MDP_Web.Migrations
 {
     [DbContext(typeof(Proiect_MDP_WebContext))]
-    partial class Proiect_MDP_WebContextModelSnapshot : ModelSnapshot
+    [Migration("20240102172511_CreateFirma")]
+    partial class CreateFirma
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,7 +32,7 @@ namespace Proiect_MDP_Web.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
-                    b.Property<string>("DenumireFirma")
+                    b.Property<string>("Denumire")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Locatie")

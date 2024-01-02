@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Policy;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -10,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Proiect_MDP_Web.Data;
 using Proiect_MDP_Web.Models;
 
-namespace Proiect_MDP_Web.Pages.Rachete
+namespace Proiect_MDP_Web.Pages.Firme
 {
     public class EditModel : PageModel
     {
@@ -22,23 +21,21 @@ namespace Proiect_MDP_Web.Pages.Rachete
         }
 
         [BindProperty]
-        public Racheta Racheta { get; set; } = default!;
+        public Firma Firma { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Racheta == null)
+            if (id == null || _context.Firma == null)
             {
                 return NotFound();
             }
 
-            var racheta =  await _context.Racheta.FirstOrDefaultAsync(m => m.ID == id);
-            if (racheta == null)
+            var firma =  await _context.Firma.FirstOrDefaultAsync(m => m.ID == id);
+            if (firma == null)
             {
                 return NotFound();
             }
-            Racheta = racheta;
-            ViewData["MagazinID"] = new SelectList(_context.Set<Magazin>(), "ID", "DenumireMagazin");
-            ViewData["FirmaID"] = new SelectList(_context.Set<Firma>(), "ID", "DenumireFirma");
+            Firma = firma;
             return Page();
         }
 
@@ -51,7 +48,7 @@ namespace Proiect_MDP_Web.Pages.Rachete
                 return Page();
             }
 
-            _context.Attach(Racheta).State = EntityState.Modified;
+            _context.Attach(Firma).State = EntityState.Modified;
 
             try
             {
@@ -59,7 +56,7 @@ namespace Proiect_MDP_Web.Pages.Rachete
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!RachetaExists(Racheta.ID))
+                if (!FirmaExists(Firma.ID))
                 {
                     return NotFound();
                 }
@@ -72,9 +69,9 @@ namespace Proiect_MDP_Web.Pages.Rachete
             return RedirectToPage("./Index");
         }
 
-        private bool RachetaExists(int id)
+        private bool FirmaExists(int id)
         {
-          return (_context.Racheta?.Any(e => e.ID == id)).GetValueOrDefault();
+          return (_context.Firma?.Any(e => e.ID == id)).GetValueOrDefault();
         }
     }
 }

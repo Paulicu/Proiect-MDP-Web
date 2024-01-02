@@ -55,6 +55,11 @@
                 <span asp-validation-for="Racheta.MagazinID" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Racheta.FirmaID" class="control-label">Denumire Firma</label>
+                <select asp-for="Racheta.FirmaID" class="form-control" asp-items="ViewBag.FirmaID"></select>
+                <span asp-validation-for="Racheta.FirmaID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>

@@ -17,5 +17,7 @@ namespace Proiect_MDP_Web.Data
         public DbSet<Proiect_MDP_Web.Models.Racheta> Racheta { get; set; } = default!;
 
         public DbSet<Proiect_MDP_Web.Models.Magazin>? Magazin { get; set; }
+
+        public DbSet<Proiect_MDP_Web.Models.Firma>? Firma { get; set; }
     }
 }

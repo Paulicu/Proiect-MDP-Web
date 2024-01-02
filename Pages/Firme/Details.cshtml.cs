@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Proiect_MDP_Web.Data;
 using Proiect_MDP_Web.Models;
 
-namespace Proiect_MDP_Web.Pages.Rachete
+namespace Proiect_MDP_Web.Pages.Firme
 {
     public class DetailsModel : PageModel
     {
@@ -19,26 +19,23 @@ namespace Proiect_MDP_Web.Pages.Rachete
             _context = context;
         }
 
-      public Racheta Racheta { get; set; } = default!; 
+      public Firma Firma { get; set; } = default!; 
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Racheta == null)
+            if (id == null || _context.Firma == null)
             {
                 return NotFound();
             }
 
-            var racheta = await _context.Racheta
-                .Include(b => b.Magazin)
-                .Include(c => c.Firma)
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (racheta == null)
+            var firma = await _context.Firma.FirstOrDefaultAsync(m => m.ID == id);
+            if (firma == null)
             {
                 return NotFound();
             }
             else 
             {
-                Racheta = racheta;
+                Firma = firma;
             }
             return Page();
         }
