@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Proiect_MDP_Web.Data;
 
@@ -11,9 +12,10 @@ using Proiect_MDP_Web.Data;
 namespace Proiect_MDP_Web.Migrations
 {
     [DbContext(typeof(Proiect_MDP_WebContext))]
-    partial class Proiect_MDP_WebContextModelSnapshot : ModelSnapshot
+    [Migration("20240102180126_CategorieRacheta")]
+    partial class CategorieRacheta
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
