@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Proiect_MDP_Web.Data;
 using Proiect_MDP_Web.Models;
 
@@ -21,8 +22,15 @@ namespace Proiect_MDP_Web.Pages.Servicii
 
         public IActionResult OnGet()
         {
-            ViewData["ClientID"] = new SelectList(_context.Client, "ID", "ID");
-            ViewData["RachetaID"] = new SelectList(_context.Racheta, "ID", "ID");
+            var rachetaList = _context.Racheta
+                .Include(b => b.Firma)
+                .Select(x => new
+                {
+                    x.ID,
+                    RachetaFullName = x.Denumire + " - " + x.Firma.DenumireFirma
+                });
+            ViewData["ClientID"] = new SelectList(_context.Client, "ID", "NumeComplet");
+            ViewData["RachetaID"] = new SelectList(rachetaList, "ID", "RachetaFullName");
             return Page();
         }
 

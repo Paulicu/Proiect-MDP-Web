@@ -27,7 +27,9 @@ namespace Proiect_MDP_Web.Pages.Servicii
             {
                 Serviciu = await _context.Serviciu
                 .Include(s => s.Client)
-                .Include(s => s.Racheta).ToListAsync();
+                .Include(s => s.Racheta)
+                    .ThenInclude(s => s.Firma)
+                .ToListAsync();
             }
         }
     }
