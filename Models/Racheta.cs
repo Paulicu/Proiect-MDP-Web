@@ -9,6 +9,7 @@ namespace Proiect_MDP_Web.Models
         public int ID { get; set; }
 
         [Display(Name = "Nume Racheta")]
+        [StringLength(150, MinimumLength = 3, ErrorMessage = "Numele rachetei trebuie să aibă între 3 și 150 de caractere.")]
         public string Denumire { get; set; }
 
         public string Material { get; set; }
