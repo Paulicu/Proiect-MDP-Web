@@ -29,7 +29,10 @@ namespace Proiect_MDP_Web.Pages.Servicii
                 return NotFound();
             }
 
-            var serviciu = await _context.Serviciu.FirstOrDefaultAsync(m => m.ID == id);
+            var serviciu = await _context.Serviciu
+                .Include(s => s.Client)
+                .Include(s => s.Racheta)
+                .FirstOrDefaultAsync(m => m.ID == id);
 
             if (serviciu == null)
             {
