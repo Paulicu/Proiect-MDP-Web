@@ -10,11 +10,25 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
+
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Cauta dupa Denumire Racheta / Firma Nume:
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Search" class="btn btn-primary" /> |
+            <a asp-page="./Index">Back to full List</a>
+        </p>
+    </div>
+</form>
+
 <table class="table">
     <thead>
         <tr>
             <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.DenumireSort">
                 @Html.DisplayNameFor(model => model.Racheta[0].Denumire)
+                </a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Racheta[0].Material)
@@ -38,7 +52,9 @@
                 @Html.DisplayNameFor(model => model.Racheta[0].Magazin.DenumireMagazin)
             </th>
             <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.FirmaSort">
                 @Html.DisplayNameFor(model => model.Racheta[0].Firma.DenumireFirma)
+                </a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Racheta[0].CategoriiRacheta)
