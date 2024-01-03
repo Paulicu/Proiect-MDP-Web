@@ -20,6 +20,7 @@ namespace Proiect_MDP_Web.Models
         public int DimensiuneCap { get; set; }
 
         [Column(TypeName = "decimal(6, 2)")]
+        [Range(0.01, 2000)]
         public decimal Pret {  get; set; }
 
         [DataType(DataType.Date)]
