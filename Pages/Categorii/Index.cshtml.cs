@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Proiect_MDP_Web.Data;
 using Proiect_MDP_Web.Models;
+using Proiect_MDP_Web.Models.ViewModels;
 
 namespace Proiect_MDP_Web.Pages.Categorii
 {
@@ -20,12 +21,25 @@ namespace Proiect_MDP_Web.Pages.Categorii
         }
 
         public IList<Categorie> Categorie { get;set; } = default!;
-
-        public async Task OnGetAsync()
+        public CategorieIndexData CategorieData { get; set; }
+        public int CategorieID { get; set; }
+        public int RachetaID { get; set; }
+        public async Task OnGetAsync(int? id, int? rachetaID)
         {
-            if (_context.Categorie != null)
+            CategorieData = new CategorieIndexData();
+            CategorieData.Categorii = await _context.Categorie
+                .Include(i => i.CategoriiRacheta)
+                    .ThenInclude(i => i.Racheta)
+                    .ThenInclude(c => c.Firma)
+                .OrderBy(i => i.DenumireCategorie)
+                .ToListAsync();
+
+            if (id != null)
             {
-                Categorie = await _context.Categorie.ToListAsync();
+                CategorieID = id.Value;
+                Categorie category = CategorieData.Categorii
+                    .Where(i => i.ID == id.Value).Single();
+                CategorieData.CategoriiRacheta = category.CategoriiRacheta;
             }
         }
     }
