@@ -32,6 +32,5 @@ namespace Proiect_MDP_Web.Models
         public Firma? Firma { get; set; } // navigation property
 
         public ICollection<CategorieRacheta>? CategoriiRacheta { get; set; }
-
     }
 }
