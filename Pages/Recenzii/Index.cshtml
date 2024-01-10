@@ -44,7 +44,7 @@
                 @Html.DisplayFor(modelItem => item.Comentariu)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Rating)
+                @Html.Raw(new string('⭐', item.Rating))
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Client.NumeComplet)
