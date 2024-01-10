@@ -1,10 +1,34 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container">
+    <div class="jumbotron text-center">
+        <img src="~/images/logo.png" alt="Logo" class="img-fluid" />
+        <h1 class="display-4">Bine ați venit la Magazinul nostru de Rachete!</h1>
+        <p class="lead">Cea mai bună alegere pentru pasionații de tenis, badminton, padel sau squash.</p>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Despre Noi</h2>
+            <p>
+                Magazinul nostru oferă o gamă largă de rachete de tenis, badminton, padel sau squash, echipamente și accesorii de înaltă calitate.
+                Ne dedicăm să vă oferim cele mai bune produse pentru a vă îmbunătăți jocul.
+            </p>
+        </div>
+        <div class="col-md-6">
+            <h2>Colecția Noastră</h2>
+            <p>
+                Explorați colecția noastră diversificată de rachete de tenis, badminton, padel sau squash, inclusiv cele de la cele mai renumite mărci.
+                Selectați echipamentul care se potrivește cel mai bine stilului și nivelului dvs. de joc.
+            </p>
+
+            <div class="nav-link">
+                <a href="~/Rachete">Colecția de Rachete</a>
+            </div>
+        </div>
+    </div>
 </div>
