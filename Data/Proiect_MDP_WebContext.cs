@@ -25,5 +25,7 @@ namespace Proiect_MDP_Web.Data
         public DbSet<Proiect_MDP_Web.Models.Client>? Client { get; set; }
 
         public DbSet<Proiect_MDP_Web.Models.Serviciu>? Serviciu { get; set; }
+
+        public DbSet<Proiect_MDP_Web.Models.Recenzie>? Recenzie { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Proiect_MDP_Web.Data;
 
@@ -11,9 +12,10 @@ using Proiect_MDP_Web.Data;
 namespace Proiect_MDP_Web.Migrations
 {
     [DbContext(typeof(Proiect_MDP_WebContext))]
-    partial class Proiect_MDP_WebContextModelSnapshot : ModelSnapshot
+    [Migration("20240110181851_Recenzie")]
+    partial class Recenzie
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -178,40 +180,6 @@ namespace Proiect_MDP_Web.Migrations
                     b.ToTable("Racheta");
                 });
 
-            modelBuilder.Entity("Proiect_MDP_Web.Models.Recenzie", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
-
-                    b.Property<int?>("ClientID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Comentariu")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("RachetaID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Rating")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Titlu")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("ClientID");
-
-                    b.HasIndex("RachetaID");
-
-                    b.ToTable("Recenzie");
-                });
-
             modelBuilder.Entity("Proiect_MDP_Web.Models.Serviciu", b =>
                 {
                     b.Property<int>("ID")
@@ -273,21 +241,6 @@ namespace Proiect_MDP_Web.Migrations
                     b.Navigation("Firma");
 
                     b.Navigation("Magazin");
-                });
-
-            modelBuilder.Entity("Proiect_MDP_Web.Models.Recenzie", b =>
-                {
-                    b.HasOne("Proiect_MDP_Web.Models.Client", "Client")
-                        .WithMany()
-                        .HasForeignKey("ClientID");
-
-                    b.HasOne("Proiect_MDP_Web.Models.Racheta", "Racheta")
-                        .WithMany()
-                        .HasForeignKey("RachetaID");
-
-                    b.Navigation("Client");
-
-                    b.Navigation("Racheta");
                 });
 
             modelBuilder.Entity("Proiect_MDP_Web.Models.Serviciu", b =>
