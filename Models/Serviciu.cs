@@ -13,13 +13,22 @@ namespace Proiect_MDP_Web.Models
     public class Serviciu
     {
         public int ID { get; set; }
+
+        [Display(Name = "Tip Serviciu")]
         public TipServiciu TipServiciu { get; set; }
+        
+        [Display(Name = "Client")]
         public int? ClientID { get; set; }
-        public Client? Client { get; set; }
+
+        public Client? Client { get; set; } 
+        
+        [Display(Name = "Racheta")]
         public int? RachetaID { get; set; }
+
         public Racheta? Racheta { get; set; }
 
         [DataType(DataType.Date)]
+        [Display(Name = "Data Finalizarii")]
         public DateTime ReturnDate { get; set; }
 
         public string NumeDataSpecifica

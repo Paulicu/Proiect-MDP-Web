@@ -18,6 +18,7 @@ namespace Proiect_MDP_Web.Models
 
         public int Greutate { get; set; }
 
+        [Display(Name = "Dimensiune Cap")]
         public int DimensiuneCap { get; set; }
 
         [Column(TypeName = "decimal(6, 2)")]
@@ -33,6 +34,7 @@ namespace Proiect_MDP_Web.Models
         public int? FirmaID { get; set; }
         public Firma? Firma { get; set; } // navigation property
 
+        [Display(Name = "Categorii")]
         public ICollection<CategorieRacheta>? CategoriiRacheta { get; set; }
     }
 }
