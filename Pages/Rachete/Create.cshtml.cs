@@ -42,20 +42,20 @@ namespace Proiect_MDP_Web.Pages.Rachete
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync(string[] selectedCategories)
         {
-            var newBook = new Racheta();
+            var newRacheta = new Racheta();
             if (selectedCategories != null)
             {
-                newBook.CategoriiRacheta = new List<CategorieRacheta>();
+                newRacheta.CategoriiRacheta = new List<CategorieRacheta>();
                 foreach (var cat in selectedCategories)
                 {
                     var catToAdd = new CategorieRacheta
                     {
                         CategorieID = int.Parse(cat)
                     };
-                    newBook.CategoriiRacheta.Add(catToAdd);
+                    newRacheta.CategoriiRacheta.Add(catToAdd);
                 }
             }
-            Racheta.CategoriiRacheta = newBook.CategoriiRacheta;
+            Racheta.CategoriiRacheta = newRacheta.CategoriiRacheta;
             _context.Racheta.Add(Racheta);
             await _context.SaveChangesAsync();
             return RedirectToPage("./Index");

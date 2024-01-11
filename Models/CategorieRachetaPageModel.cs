@@ -24,7 +24,7 @@ namespace Proiect_MDP_Web.Models
             }
         }
 
-        public void UpdateBookCategories(Proiect_MDP_WebContext context, string[] selectedCategories, Racheta rachetaDeUpdatat)
+        public void UpdateRachetaCategories(Proiect_MDP_WebContext context, string[] selectedCategories, Racheta rachetaDeUpdatat)
         {
             if (selectedCategories == null)
             {
@@ -32,13 +32,13 @@ namespace Proiect_MDP_Web.Models
                 return;
             }
             var selectedCategoriesHS = new HashSet<string>(selectedCategories);
-            var bookCategories = new HashSet<int>
+            var rachetaCategories = new HashSet<int>
             (rachetaDeUpdatat.CategoriiRacheta.Select(c => c.Categorie.ID));
             foreach (var cat in context.Categorie)
             {
                 if (selectedCategoriesHS.Contains(cat.ID.ToString()))
                 {
-                    if (!bookCategories.Contains(cat.ID))
+                    if (!rachetaCategories.Contains(cat.ID))
                     {
                         rachetaDeUpdatat.CategoriiRacheta.Add(
                         new CategorieRacheta
@@ -50,7 +50,7 @@ namespace Proiect_MDP_Web.Models
                 }
                 else
                 {
-                    if (bookCategories.Contains(cat.ID))
+                    if (rachetaCategories.Contains(cat.ID))
                     {
                         CategorieRacheta courseToRemove
                         = rachetaDeUpdatat

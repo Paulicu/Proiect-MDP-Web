@@ -75,15 +75,15 @@ namespace Proiect_MDP_Web.Pages.Rachete
             if (await TryUpdateModelAsync<Racheta>(
             rachetaDeUpdatat,
             "Racheta",
-            i => i.Denumire, i => i.Firma, i => i.FirmaID,
+            i => i.Denumire, i => i.Material, i => i.Tehnologie, i => i.Greutate, i => i.DimensiuneCap, i => i.Firma, i => i.FirmaID,
             i => i.Pret, i => i.Editie, i => i.MagazinID))
             {
-                UpdateBookCategories(_context, selectedCategories, rachetaDeUpdatat);
+                UpdateRachetaCategories(_context, selectedCategories, rachetaDeUpdatat);
                 await _context.SaveChangesAsync();
                 return RedirectToPage("./Index");
             }
        
-            UpdateBookCategories(_context, selectedCategories, rachetaDeUpdatat);
+            UpdateRachetaCategories(_context, selectedCategories, rachetaDeUpdatat);
             PopulateAssignedCategoryData(_context, rachetaDeUpdatat);
             return Page();
         }

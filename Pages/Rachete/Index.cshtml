@@ -31,18 +31,6 @@
                 </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Racheta[0].Material)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Racheta[0].Tehnologie)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Racheta[0].Greutate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Racheta[0].DimensiuneCap)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Racheta[0].Pret)
             </th>
             <th>
@@ -77,18 +65,6 @@
                     @Html.DisplayFor(modelItem => item.Denumire)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Material)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Tehnologie)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Greutate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DimensiuneCap)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.Pret)
                 </td>
                 <td>
@@ -104,7 +80,7 @@
                     @{
                         foreach (var category in item.CategoriiRacheta)
                         {
-                            @category.Categorie.ID @: @category.Categorie.DenumireCategorie <br />
+                             @category.Categorie.DenumireCategorie <br />
                         }
                     }
                 </td>

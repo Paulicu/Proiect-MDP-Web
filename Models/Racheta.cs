@@ -16,9 +16,10 @@ namespace Proiect_MDP_Web.Models
 
         public string Tehnologie { get; set; }
 
+        [Display(Name = "Greutate (g)")]
         public int Greutate { get; set; }
 
-        [Display(Name = "Dimensiune Cap")]
+        [Display(Name = "Dimensiune Cap (cm2)")]
         public int DimensiuneCap { get; set; }
 
         [Column(TypeName = "decimal(6, 2)")]
