@@ -30,6 +30,7 @@ namespace Proiect_MDP_Web.Pages.Rachete
 
             var racheta = await _context.Racheta
                 .Include(b => b.Magazin)
+                .Include(c => c.Firma)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (racheta == null)
             {

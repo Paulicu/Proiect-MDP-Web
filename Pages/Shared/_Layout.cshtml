@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Magazin Sportiv</title>
+    <title>@ViewData["Title"] - Magazin Rachete</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Proiect_MDP_Web.styles.css" asp-append-version="true" />
@@ -26,9 +26,25 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Magazine/Index">Magazine</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Firme/Index">Firme</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Categorii/Index">Categorii</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Clienti/Index">Clienti</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Servicii/Index">Servicii</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Recenzii/Index">Recenzii</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
                     </ul>
+                    <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>
@@ -41,7 +57,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2024 - Proiect_MDP_Web - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            &copy; 2024 - Paul Uifălean & Tudor Groza - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
     </footer>
 

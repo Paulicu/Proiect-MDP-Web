@@ -1,12 +1,33 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Proiect_MDP_Web.Data;
+using Microsoft.AspNetCore.Identity;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<Proiect_MDP_WebContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Proiect_MDP_WebContext") ?? throw new InvalidOperationException("Connection string 'Proiect_MDP_WebContext' not found.")));
+
+builder.Services.AddDbContext<MagazinSportivIdentityContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Proiect_MDP_WebContext") ?? throw new InvalidOperationException("Connection string 'Proiect_MDP_WebContext' not found.")));
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<MagazinSportivIdentityContext>();
+
+builder.Services.AddRazorPages(options =>
+{
+    options.Conventions.AuthorizeFolder("/Rachete");
+    options.Conventions.AllowAnonymousToPage("/Rachete/Index");
+    options.Conventions.AllowAnonymousToPage("/Rachete/Details");
+    options.Conventions.AuthorizeFolder("/Clienti", "AdminPolicy");
+});
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminPolicy", policy => policy.RequireRole("Admin"));
+});
 
 var app = builder.Build();
 
@@ -22,6 +43,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();;
 
 app.UseAuthorization();
 

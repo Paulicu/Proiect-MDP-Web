@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Policy;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -11,7 +12,8 @@ using Proiect_MDP_Web.Models;
 
 namespace Proiect_MDP_Web.Pages.Rachete
 {
-    public class CreateModel : PageModel
+    [Authorize(Roles = "Admin")]
+    public class CreateModel : CategorieRachetaPageModel
     {
         private readonly Proiect_MDP_Web.Data.Proiect_MDP_WebContext _context;
 
@@ -23,6 +25,13 @@ namespace Proiect_MDP_Web.Pages.Rachete
         public IActionResult OnGet()
         {
             ViewData["MagazinID"] = new SelectList(_context.Set<Magazin>(), "ID", "DenumireMagazin");
+            ViewData["FirmaID"] = new SelectList(_context.Set<Firma>(), "ID", "DenumireFirma");
+
+            var racheta = new Racheta();
+            racheta.CategoriiRacheta = new List<CategorieRacheta>();
+
+            PopulateAssignedCategoryData(_context, racheta);
+
             return Page();
         }
 
@@ -31,16 +40,24 @@ namespace Proiect_MDP_Web.Pages.Rachete
         
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(string[] selectedCategories)
         {
-          if (!ModelState.IsValid || _context.Racheta == null || Racheta == null)
+            var newRacheta = new Racheta();
+            if (selectedCategories != null)
             {
-                return Page();
+                newRacheta.CategoriiRacheta = new List<CategorieRacheta>();
+                foreach (var cat in selectedCategories)
+                {
+                    var catToAdd = new CategorieRacheta
+                    {
+                        CategorieID = int.Parse(cat)
+                    };
+                    newRacheta.CategoriiRacheta.Add(catToAdd);
+                }
             }
-
+            Racheta.CategoriiRacheta = newRacheta.CategoriiRacheta;
             _context.Racheta.Add(Racheta);
             await _context.SaveChangesAsync();
-
             return RedirectToPage("./Index");
         }
     }
